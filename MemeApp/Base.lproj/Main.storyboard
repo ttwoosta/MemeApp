@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <scenes>
+        <!--Image PickerVC-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="TMImagePickerVC" customModule="MemeApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ST2-Il-EyT">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
+                            </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6iO-uy-OeM">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem title="Pick" id="6uw-9y-GRL">
+                                        <connections>
+                                            <action selector="pickImageAction:" destination="BYZ-38-t0r" id="RjV-qN-ZUB"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6iO-uy-OeM" firstAttribute="top" secondItem="ST2-Il-EyT" secondAttribute="bottom" id="Gsx-fL-1vy"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="6iO-uy-OeM" secondAttribute="bottom" id="PaF-Jg-cdZ"/>
+                            <constraint firstItem="ST2-Il-EyT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ZG2-vm-cxe"/>
+                            <constraint firstAttribute="trailing" secondItem="6iO-uy-OeM" secondAttribute="trailing" id="a0L-rT-yKS"/>
+                            <constraint firstItem="6iO-uy-OeM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="bRe-AK-hgE"/>
+                            <constraint firstAttribute="trailing" secondItem="ST2-Il-EyT" secondAttribute="trailing" id="jf1-oR-M5s"/>
+                            <constraint firstItem="ST2-Il-EyT" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="rfb-bp-6Av"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imgView" destination="ST2-Il-EyT" id="qni-19-ada"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>
