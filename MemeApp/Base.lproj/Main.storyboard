@@ -22,9 +22,15 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6iO-uy-OeM">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
-                                    <barButtonItem title="Pick" id="6uw-9y-GRL">
+                                    <barButtonItem title="Pick image from Album" id="6uw-9y-GRL">
                                         <connections>
-                                            <action selector="pickImageAction:" destination="BYZ-38-t0r" id="RjV-qN-ZUB"/>
+                                            <action selector="pickImageFromAlbum:" destination="BYZ-38-t0r" id="Ru1-X6-C9e"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="QYi-7X-iAr"/>
+                                    <barButtonItem title="Pick image from Camera" id="HhQ-51-XVy">
+                                        <connections>
+                                            <action selector="pickImageFromCamera:" destination="BYZ-38-t0r" id="ref-0T-UpZ"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>

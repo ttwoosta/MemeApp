@@ -17,13 +17,24 @@ class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavi
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-    @IBAction func pickImageAction(sender: AnyObject) {
+    @IBAction func pickImageFromAlbum(sender: AnyObject) {
         
         let imgPicker = UIImagePickerController()
+        imgPicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         imgPicker.delegate = self
         self.presentViewController(imgPicker, animated: true, completion: nil)
         
     }
+    
+    @IBAction func pickImageFromCamera(sender: AnyObject) {
+        
+        let imgPicker = UIImagePickerController()
+        imgPicker.sourceType = UIImagePickerControllerSourceType.Camera
+        imgPicker.delegate = self
+        self.presentViewController(imgPicker, animated: true, completion: nil)
+        
+    }
+    
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         
