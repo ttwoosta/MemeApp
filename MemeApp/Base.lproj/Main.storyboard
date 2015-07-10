@@ -48,6 +48,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="barBtnItemPickImageCamera" destination="HhQ-51-XVy" id="W6W-Sc-cAs"/>
                         <outlet property="imgView" destination="ST2-Il-EyT" id="qni-19-ada"/>
                     </connections>
                 </viewController>
