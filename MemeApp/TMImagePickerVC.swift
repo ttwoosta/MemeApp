@@ -10,10 +10,14 @@ import UIKit
 
 class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
+    @IBOutlet weak var bottomBar: UIToolbar!
+    
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var textFieldTop: UITextField!
     @IBOutlet weak var textFieldBottom: UITextField!
     @IBOutlet weak var barBtnItemPickImageCamera: UIBarButtonItem!
+    
+    var meme: TMMeme!
     
     //////////////////////////////////
     // Override view controller funcs
@@ -160,5 +164,55 @@ class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavi
         
     }
     
+    
+    /////////////////////
+    // Generate Meme object
+    /////////////////////
+    
+    func save() {
+        var meme = TMMeme(orgImage: imgView.image!,
+            memeImage: generateMemeImage(),
+            topText: textFieldTop.text,
+            bottomText: textFieldBottom.text)
+        
+        self.meme = meme
+    }
+    
+    // Render view to an image
+    func generateMemeImage() -> UIImage {
+        
+        // hide toolbar and navigation bar
+        self.bottomBar.hidden = true
+        
+        // begin image context
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        
+        // render view hierarchy
+        self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+        
+        // grabe image from current context
+        let memeImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        // end image context
+        UIGraphicsEndImageContext()
+        
+        // show toolbar and navigation bar
+        self.bottomBar.hidden = false
+        
+        return memeImage
+    }
+
+    /////////////////////
+    // Segue
+    /////////////////////
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "memeViewController" {
+            self.save()
+            
+            let vc = segue.destinationViewController as! MemeViewController
+            vc.meme = self.meme
+        }
+    }
 }
 

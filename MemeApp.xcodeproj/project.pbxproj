@@ -14,6 +14,7 @@
 		064DC4671B500E3800E26A4B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 064DC4651B500E3800E26A4B /* LaunchScreen.xib */; };
 		064DC4731B500E3800E26A4B /* MemeAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064DC4721B500E3800E26A4B /* MemeAppTests.swift */; };
 		064DC47D1B50D47A00E26A4B /* TMMeme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064DC47C1B50D47A00E26A4B /* TMMeme.swift */; };
+		064DC47F1B50DCD200E26A4B /* MemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064DC47E1B50DCD200E26A4B /* MemeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		064DC4711B500E3800E26A4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		064DC4721B500E3800E26A4B /* MemeAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeAppTests.swift; sourceTree = "<group>"; };
 		064DC47C1B50D47A00E26A4B /* TMMeme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMMeme.swift; sourceTree = "<group>"; };
+		064DC47E1B50DCD200E26A4B /* MemeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 			children = (
 				064DC45C1B500E3800E26A4B /* AppDelegate.swift */,
 				064DC45E1B500E3800E26A4B /* TMImagePickerVC.swift */,
+				064DC47E1B50DCD200E26A4B /* MemeViewController.swift */,
 				064DC47C1B50D47A00E26A4B /* TMMeme.swift */,
 				064DC4601B500E3800E26A4B /* Main.storyboard */,
 				064DC4631B500E3800E26A4B /* Images.xcassets */,
@@ -218,6 +221,7 @@
 			files = (
 				064DC47D1B50D47A00E26A4B /* TMMeme.swift in Sources */,
 				064DC45F1B500E3800E26A4B /* TMImagePickerVC.swift in Sources */,
+				064DC47F1B50DCD200E26A4B /* MemeViewController.swift in Sources */,
 				064DC45D1B500E3800E26A4B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
