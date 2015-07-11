@@ -23,6 +23,16 @@ class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavi
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        // textFields default attributes
+        let mmTextAttributes = [
+            NSStrokeColorAttributeName: UIColor.blackColor(),
+            NSForegroundColorAttributeName: UIColor.whiteColor(),
+            NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+            NSStrokeWidthAttributeName: 1.0,
+        ]
+        self.textFieldTop.defaultTextAttributes = mmTextAttributes
+        self.textFieldBottom.defaultTextAttributes = mmTextAttributes
+        
         // Text aligment center
         self.textFieldTop.textAlignment = NSTextAlignment.Center
         self.textFieldBottom.textAlignment = NSTextAlignment.Center
@@ -30,7 +40,6 @@ class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavi
         // textFields delegate
         self.textFieldTop.delegate = self
         self.textFieldBottom.delegate = self
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -39,6 +48,16 @@ class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavi
         // Enable/disable bar button item
         // according to source type available
         self.barBtnItemPickImageCamera.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+        
+        // subcribe to keyboard notification
+        self.subcribeToKeyboardNotification()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // unsubcribe from keyboard notification
+        self.unsubcribeFromKeyboardNotification()
     }
     
     /////////////////////
@@ -57,6 +76,55 @@ class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavi
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    /////////////////////
+    // Keyboard notifications
+    /////////////////////
+    
+    func subcribeToKeyboardNotification() {
+        NSNotificationCenter.defaultCenter().addObserver(self,
+            selector: "keyboardWillShow:",
+            name: UIKeyboardWillShowNotification,
+            object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self,
+            selector: "keyboardWillHide:",
+            name: UIKeyboardWillHideNotification,
+            object: nil)
+    }
+    
+    func unsubcribeFromKeyboardNotification() {
+        NSNotificationCenter.defaultCenter().removeObserver(self,
+            name: UIKeyboardWillShowNotification,
+            object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self,
+            name: UIKeyboardWillHideNotification,
+            object: nil)
+    }
+    
+    /////////////////////
+    // Handle keyboard appear/disappear
+    /////////////////////
+    
+    // when keyboardWillShow notification is recieved, shift view frame up
+    func keyboardWillShow(notification: NSNotification) {
+        if self.textFieldBottom.isFirstResponder() {
+            self.view.frame.origin.y -= self.getKeyboardHeight(notification)
+        }
+    }
+    
+    // when keyboardWillHide notification is recieved, shift view frame down
+    func keyboardWillHide(notification: NSNotification) {
+        if self.textFieldBottom.isFirstResponder() {
+            self.view.frame.origin.y += self.getKeyboardHeight(notification)
+        }
+    }
+    
+    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
+        let userInfo = notification.userInfo as! [String: AnyObject]
+        let keyboardSize = userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue
+        return keyboardSize.CGRectValue().height
     }
     
     //////////////////////////////////

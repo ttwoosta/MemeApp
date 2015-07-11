@@ -36,22 +36,22 @@
                                 </items>
                             </toolbar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gft-ie-fj5">
-                                <rect key="frame" x="0.0" y="40" width="600" height="30"/>
+                                <rect key="frame" x="0.0" y="40" width="600" height="45"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="KaZ-J8-tVN"/>
+                                    <constraint firstAttribute="height" constant="45" id="KaZ-J8-tVN"/>
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="166-5Y-ioz">
-                                <rect key="frame" x="0.0" y="508" width="600" height="30"/>
+                                <rect key="frame" x="0.0" y="493" width="600" height="45"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="7wi-bb-o2G"/>
+                                    <constraint firstAttribute="height" constant="45" id="7wi-bb-o2G"/>
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
