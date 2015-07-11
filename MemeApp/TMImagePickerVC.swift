@@ -8,15 +8,29 @@
 
 import UIKit
 
-class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var imgView: UIImageView!
-
+    @IBOutlet weak var textFieldTop: UITextField!
+    @IBOutlet weak var textFieldBottom: UITextField!
     @IBOutlet weak var barBtnItemPickImageCamera: UIBarButtonItem!
+    
+    //////////////////////////////////
+    // Override view controller funcs
+    //////////////////////////////////
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // Text aligment center
+        self.textFieldTop.textAlignment = NSTextAlignment.Center
+        self.textFieldBottom.textAlignment = NSTextAlignment.Center
+        
+        // textFields delegate
+        self.textFieldTop.delegate = self
+        self.textFieldBottom.delegate = self
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -26,6 +40,28 @@ class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavi
         // according to source type available
         self.barBtnItemPickImageCamera.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
     }
+    
+    /////////////////////
+    // UITextFieldDelegate
+    /////////////////////
+    
+    // clear default text on textFields
+    func textFieldDidBeginEditing(textField: UITextField) {
+        if (textField.text == "TOP" && textField == textFieldTop) ||
+            (textField.text == "BOTTOM" && textField == textFieldBottom) {
+            textField.text = ""
+        }
+    }
+    
+    // dimiss keyboard when tap on return key
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    //////////////////////////////////
+    // Button event handlers
+    //////////////////////////////////
     
     @IBAction func pickImageFromAlbum(sender: AnyObject) {
         
@@ -45,6 +81,9 @@ class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavi
         
     }
     
+    //////////////////////////////////
+    // UIImagePickerControllerDelegate
+    //////////////////////////////////
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         

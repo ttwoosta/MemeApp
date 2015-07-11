@@ -35,21 +35,47 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gft-ie-fj5">
+                                <rect key="frame" x="0.0" y="40" width="600" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="KaZ-J8-tVN"/>
+                                </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="166-5Y-ioz">
+                                <rect key="frame" x="0.0" y="508" width="600" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="7wi-bb-o2G"/>
+                                </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="gft-ie-fj5" secondAttribute="trailing" id="3Sf-uh-mht"/>
+                            <constraint firstAttribute="trailing" secondItem="166-5Y-ioz" secondAttribute="trailing" id="A7A-hI-Z3u"/>
                             <constraint firstItem="6iO-uy-OeM" firstAttribute="top" secondItem="ST2-Il-EyT" secondAttribute="bottom" id="Gsx-fL-1vy"/>
+                            <constraint firstItem="gft-ie-fj5" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="Ibt-0t-8AU"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="6iO-uy-OeM" secondAttribute="bottom" id="PaF-Jg-cdZ"/>
                             <constraint firstItem="ST2-Il-EyT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ZG2-vm-cxe"/>
                             <constraint firstAttribute="trailing" secondItem="6iO-uy-OeM" secondAttribute="trailing" id="a0L-rT-yKS"/>
                             <constraint firstItem="6iO-uy-OeM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="bRe-AK-hgE"/>
+                            <constraint firstItem="gft-ie-fj5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="hLp-gn-ocO"/>
                             <constraint firstAttribute="trailing" secondItem="ST2-Il-EyT" secondAttribute="trailing" id="jf1-oR-M5s"/>
                             <constraint firstItem="ST2-Il-EyT" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="rfb-bp-6Av"/>
+                            <constraint firstItem="6iO-uy-OeM" firstAttribute="top" secondItem="166-5Y-ioz" secondAttribute="bottom" constant="18" id="tp6-Wj-ixc"/>
+                            <constraint firstItem="166-5Y-ioz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="xeT-wh-oeK"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="barBtnItemPickImageCamera" destination="HhQ-51-XVy" id="W6W-Sc-cAs"/>
                         <outlet property="imgView" destination="ST2-Il-EyT" id="qni-19-ada"/>
+                        <outlet property="textFieldBottom" destination="166-5Y-ioz" id="TzN-Qk-1hd"/>
+                        <outlet property="textFieldTop" destination="gft-ie-fj5" id="tbT-c0-u21"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
