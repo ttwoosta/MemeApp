@@ -179,8 +179,13 @@ class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavi
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         
+        // set image to imageView
         self.imgView.image = image
+        
+        // reset controls
         self.hasMemeImage = true
+        self.textFieldTop.text = "TOP"
+        self.textFieldBottom.text = "BOTTOM"
         
         // reorder controls so that textFields
         // would stay on top of imageView
