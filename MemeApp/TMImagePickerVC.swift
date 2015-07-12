@@ -10,14 +10,21 @@ import UIKit
 
 class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
-    @IBOutlet weak var bottomBar: UIToolbar!
-    
+    var sharedMemes = [TMMeme]()
+
+    @IBOutlet weak var centerView: UIView!
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var textFieldTop: UITextField!
     @IBOutlet weak var textFieldBottom: UITextField!
+
+    // nanvigation bar items
+    @IBOutlet weak var barItemCancel: UIBarButtonItem!
+    @IBOutlet weak var barItemShare: UIBarButtonItem!
+    
+    // Bottom bar and camera item
+    @IBOutlet weak var bottomBar: UIToolbar!
     @IBOutlet weak var barBtnItemPickImageCamera: UIBarButtonItem!
     
-    var meme: TMMeme!
     
     //////////////////////////////////
     // Override view controller funcs
@@ -27,12 +34,15 @@ class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavi
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        // disable navigation items and top, bottom textFields
+        self.hasMemeImage = false
+        
         // textFields default attributes
         let mmTextAttributes = [
             NSStrokeColorAttributeName: UIColor.blackColor(),
             NSForegroundColorAttributeName: UIColor.whiteColor(),
             NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSStrokeWidthAttributeName: 1.0,
+            NSStrokeWidthAttributeName: -3.0,
         ]
         self.textFieldTop.defaultTextAttributes = mmTextAttributes
         self.textFieldBottom.defaultTextAttributes = mmTextAttributes
@@ -153,6 +163,16 @@ class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavi
         
     }
     
+    @IBAction func cancelAction(sender: AnyObject) {
+        // clear image and reset textFields
+        self.imgView.image = nil
+        self.textFieldTop.text = "TOP"
+        self.textFieldBottom.text = "BOTTOM"
+        
+        // disable share and cancel items
+        self.hasMemeImage = false
+    }
+    
     //////////////////////////////////
     // UIImagePickerControllerDelegate
     //////////////////////////////////
@@ -160,35 +180,71 @@ class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavi
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         
         self.imgView.image = image
+        self.hasMemeImage = true
+        
+        // reorder controls so that textFields
+        // would stay on top of imageView
+        self.centerView.sendSubviewToBack(imgView)
+        // bring toolbar to front
+        self.view.bringSubviewToFront(self.bottomBar)
+        
+        // hide image picker
         self.dismissViewControllerAnimated(true, completion: nil)
-        
     }
     
-    
     /////////////////////
-    // Generate Meme object
+    // Activity sheet
     /////////////////////
     
-    func save() {
-        var meme = TMMeme(orgImage: imgView.image!,
-            memeImage: generateMemeImage(),
-            topText: textFieldTop.text,
-            bottomText: textFieldBottom.text)
+    @IBAction func activityAction(sender: AnyObject) {
         
-        self.meme = meme
+        // generate meme image
+        let memeImage = generateMemeImage()
+        
+        var activityVC = UIActivityViewController(activityItems: [memeImage], applicationActivities: nil)
+        activityVC.completionWithItemsHandler = { activityType, completed, returnedItems, error in
+            if completed {
+                
+                // initialize meme object
+                var meme = TMMeme(orgImage: self.imgView.image!,
+                    memeImage: memeImage,
+                    topText: self.textFieldTop.text,
+                    bottomText: self.textFieldBottom.text)
+                
+                // save meme object
+                self.sharedMemes.append(meme)
+            }
+            else if error != nil {
+                let alert = UIAlertView(title: error.localizedFailureReason,
+                    message: error.localizedDescription,
+                    delegate: nil,
+                    cancelButtonTitle: "OK")
+                alert.show()
+            }
+        }
+        
+        self.presentViewController(activityVC, animated: true, completion: nil)
     }
     
-    // Render view to an image
+    ////////////////////////////////
+    // Generate Meme image
+    // Render venter view to an image
+    /////////////////////////////////
+
     func generateMemeImage() -> UIImage {
         
-        // hide toolbar and navigation bar
-        self.bottomBar.hidden = true
+        // hide textFields if needed
+        textFieldTop.hidden = (textFieldTop.text == "TOP")
+        textFieldBottom.hidden = (textFieldBottom.text == "BOTTOM")
+        
+        // image dimension
+        let imageRect = self.centerView.bounds
         
         // begin image context
-        UIGraphicsBeginImageContext(self.view.frame.size)
+        UIGraphicsBeginImageContext(imageRect.size)
         
         // render view hierarchy
-        self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+        self.centerView.drawViewHierarchyInRect(imageRect, afterScreenUpdates: true)
         
         // grabe image from current context
         let memeImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -196,22 +252,23 @@ class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavi
         // end image context
         UIGraphicsEndImageContext()
         
-        // show toolbar and navigation bar
-        self.bottomBar.hidden = false
+        // show textFields
+        textFieldTop.hidden = false
+        textFieldBottom.hidden = false
         
         return memeImage
     }
-
+    
     /////////////////////
-    // Segue
+    // Meme State
     /////////////////////
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "memeViewController" {
-            self.save()
-            
-            let vc = segue.destinationViewController as! MemeViewController
-            vc.meme = self.meme
+    var hasMemeImage: Bool = false {
+        didSet {
+            self.barItemCancel.enabled = self.hasMemeImage
+            self.barItemShare.enabled = self.hasMemeImage
+            self.textFieldTop.hidden = !self.hasMemeImage
+            self.textFieldBottom.hidden = !self.hasMemeImage
         }
     }
 }
