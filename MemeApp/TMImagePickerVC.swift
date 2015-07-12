@@ -10,7 +10,7 @@ import UIKit
 
 class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
-    var sharedMemes = [TMMeme]()
+    
 
     @IBOutlet weak var centerView: UIView!
     @IBOutlet weak var imgView: UIImageView!
@@ -217,7 +217,8 @@ class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavi
                     bottomText: self.textFieldBottom.text)
                 
                 // save meme object
-                self.sharedMemes.append(meme)
+                let appDelegate = AppDelegate.sharedAppDelegate()
+                appDelegate.sharedMemes.append(meme)
             }
             else if error != nil {
                 let alert = UIAlertView(title: error.localizedFailureReason,
