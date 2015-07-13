@@ -17,6 +17,7 @@ class TMMemeDetailVC: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.title = meme.topText
         self.imgView.image = meme.memeImage
     }
     

@@ -28,6 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.sharedMemes.append(TMMeme(orgImage: img!, memeImage: img!, topText: "Meme 3", bottomText: "Meme 3 for testing"))
         self.sharedMemes.append(TMMeme(orgImage: img!, memeImage: img!, topText: "Meme 4", bottomText: "Meme 4 for testing"))
         self.sharedMemes.append(TMMeme(orgImage: img!, memeImage: img!, topText: "Meme 5", bottomText: "Meme 5 for testing"))
+        self.sharedMemes.append(TMMeme(orgImage: img!, memeImage: img!, topText: "Meme 6", bottomText: "Meme 6 for testing"))
+        self.sharedMemes.append(TMMeme(orgImage: img!, memeImage: img!, topText: "Meme 7", bottomText: "Meme 7 for testing"))
+        self.sharedMemes.append(TMMeme(orgImage: img!, memeImage: img!, topText: "Meme 8", bottomText: "Meme 8 for testing"))
+        self.sharedMemes.append(TMMeme(orgImage: img!, memeImage: img!, topText: "Meme 9", bottomText: "Meme 9 for testing"))
+        self.sharedMemes.append(TMMeme(orgImage: img!, memeImage: img!, topText: "Meme 10", bottomText: "Meme 10 for testing"))
         
         return true
     }
