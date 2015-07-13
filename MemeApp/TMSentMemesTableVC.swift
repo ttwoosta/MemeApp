@@ -38,4 +38,20 @@ class TMSentMemesTableVC: UITableViewController {
         return cell
     }
     
+    /////////////////////
+    // Segue
+    /////////////////////
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "detailViewController" {
+            let cell = sender as! UITableViewCell
+            let indexPath: NSIndexPath = self.tableView.indexPathForCell(cell)!
+            let meme = sharedMemes[indexPath.row]
+            
+            let vc = segue.destinationViewController as! TMMemeDetailVC
+            vc.meme = meme
+        }
+    }
+    
+    
 }

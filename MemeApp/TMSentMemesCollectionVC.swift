@@ -38,4 +38,17 @@ class TMSentMemesCollectionVC: UICollectionViewController {
         return cell
     }
     
+    /////////////////////
+    // UICollectionViewDelegate
+    /////////////////////
+    
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let meme = sharedMemes[indexPath.row] as TMMeme
+        
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TMMemeDetailVC") as! TMMemeDetailVC
+        vc.meme = meme
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
