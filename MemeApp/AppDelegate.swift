@@ -21,6 +21,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+//        let img = UIImage(named: "IMG_1341")
+//        self.sharedMemes.append(TMMeme(orgImage: img!, memeImage: img!, topText: "Meme 1", bottomText: "Meme 1 for testing"))
+//        self.sharedMemes.append(TMMeme(orgImage: img!, memeImage: img!, topText: "Meme 2", bottomText: "Meme 2 for testing"))
+//        self.sharedMemes.append(TMMeme(orgImage: img!, memeImage: img!, topText: "Meme 3", bottomText: "Meme 3 for testing"))
+//        self.sharedMemes.append(TMMeme(orgImage: img!, memeImage: img!, topText: "Meme 4", bottomText: "Meme 4 for testing"))
+//        self.sharedMemes.append(TMMeme(orgImage: img!, memeImage: img!, topText: "Meme 5", bottomText: "Meme 5 for testing"))
+        
         return true
     }
 

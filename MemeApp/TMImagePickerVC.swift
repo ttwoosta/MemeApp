@@ -32,9 +32,8 @@ class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
-        // disable navigation items and top, bottom textFields
+        // disable navigation items and hides textFields
         self.hasMemeImage = false
         
         // textFields default attributes
@@ -164,13 +163,7 @@ class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavi
     }
     
     @IBAction func cancelAction(sender: AnyObject) {
-        // clear image and reset textFields
-        self.imgView.image = nil
-        self.textFieldTop.text = "TOP"
-        self.textFieldBottom.text = "BOTTOM"
-        
-        // disable share and cancel items
-        self.hasMemeImage = false
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     //////////////////////////////////
@@ -182,10 +175,8 @@ class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavi
         // set image to imageView
         self.imgView.image = image
         
-        // reset controls
+        // enable navigation items and show textFields
         self.hasMemeImage = true
-        self.textFieldTop.text = "TOP"
-        self.textFieldBottom.text = "BOTTOM"
         
         // reorder controls so that textFields
         // would stay on top of imageView
@@ -219,6 +210,9 @@ class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavi
                 // save meme object
                 let appDelegate = AppDelegate.sharedAppDelegate()
                 appDelegate.sharedMemes.append(meme)
+                
+                // hide image picker
+                self.dismissViewControllerAnimated(true, completion: nil)
             }
             else if error != nil {
                 let alert = UIAlertView(title: error.localizedFailureReason,
@@ -271,7 +265,6 @@ class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavi
     
     var hasMemeImage: Bool = false {
         didSet {
-            self.barItemCancel.enabled = self.hasMemeImage
             self.barItemShare.enabled = self.hasMemeImage
             self.textFieldTop.hidden = !self.hasMemeImage
             self.textFieldBottom.hidden = !self.hasMemeImage
