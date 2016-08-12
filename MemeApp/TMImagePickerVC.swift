@@ -97,12 +97,12 @@ class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavi
     
     func subcribeToKeyboardNotification() {
         NSNotificationCenter.defaultCenter().addObserver(self,
-            selector: "keyboardWillShow:",
+            selector: #selector(TMImagePickerVC.keyboardWillShow(_:)),
             name: UIKeyboardWillShowNotification,
             object: nil)
         
         NSNotificationCenter.defaultCenter().addObserver(self,
-            selector: "keyboardWillHide:",
+            selector: #selector(TMImagePickerVC.keyboardWillHide(_:)),
             name: UIKeyboardWillHideNotification,
             object: nil)
     }
@@ -197,12 +197,12 @@ class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavi
         // generate meme image
         let memeImage = generateMemeImage()
         
-        var activityVC = UIActivityViewController(activityItems: [memeImage], applicationActivities: nil)
+        let activityVC = UIActivityViewController(activityItems: [memeImage], applicationActivities: nil)
         activityVC.completionWithItemsHandler = { activityType, completed, returnedItems, error in
             if completed {
                 
                 // initialize meme object
-                var meme = TMMeme(orgImage: self.imgView.image!,
+                let meme = TMMeme(orgImage: self.imgView.image!,
                     memeImage: memeImage,
                     topText: self.textFieldTop.text,
                     bottomText: self.textFieldBottom.text)
@@ -214,7 +214,7 @@ class TMImagePickerVC: UIViewController, UIImagePickerControllerDelegate, UINavi
                 // hide image picker
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
-            else if error != nil {
+            else if let error = error {
                 let alert = UIAlertView(title: error.localizedFailureReason,
                     message: error.localizedDescription,
                     delegate: nil,
